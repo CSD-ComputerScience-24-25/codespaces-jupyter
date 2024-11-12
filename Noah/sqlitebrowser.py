@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect('db.sqlite')
+conn = sqlite3.connect('RIP\db.sqlite')
 cur = conn.cursor()
 
 while True:
@@ -11,6 +11,7 @@ while True:
         cur.close()
         break 
     elif command.startswith('SELECT'):
+        cur.execute(command)
         print(cur.fetchall(command))
     else :
         cur.execute(command)
