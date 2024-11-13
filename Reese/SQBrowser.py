@@ -1,6 +1,7 @@
 import sqlite3
 
-conn = sqlite3.connect('Reese\Reese.sqlite')
+#conn = sqlite3.connect('Reese\Reese.sqlite')
+conn = sqlite3.connect('Reese\ReeseTracks.sqlite')
 cur = conn.cursor()
 
 while True:
@@ -19,4 +20,4 @@ while True:
         
         conn.commit()
     except:
-        print("Command Failed")
+        print("Command Failed") 
