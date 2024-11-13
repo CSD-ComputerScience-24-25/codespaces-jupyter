@@ -1,6 +1,7 @@
 import sqlite3
 
-conn = sqlite3.connect('RIP\db.sqlite')
+db = "RIP.sqlite"
+conn = sqlite3.connect(db)
 cur = conn.cursor()
 
 while True:
