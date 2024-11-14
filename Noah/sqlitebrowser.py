@@ -13,9 +13,10 @@ while True:
         break 
     elif command.startswith("SELECT"):
         cur.execute(command)
-        print(cur.fetchall())
+        for thing in cur.fetchall():
+            print(thing)
     else :
         cur.execute(command)
 
-conn.commit()
+
 
