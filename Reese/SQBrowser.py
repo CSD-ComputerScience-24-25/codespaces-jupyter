@@ -21,3 +21,5 @@ while True:
         conn.commit()
     except:
         print("Command Failed") 
+        
+## SELECT User.name, Role.title, Course.title FROM User JOIN Member JOIN Course JOIN Role ON Member.user_id = User.id AND Member.course_id = Course.id AND Member.role = Role.id ORDER BY Course.title, Role.id DESC, User.name
