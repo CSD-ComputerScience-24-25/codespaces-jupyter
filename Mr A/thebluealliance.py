@@ -27,7 +27,7 @@ for event in data:
     print(json.dumps(matches, indent= 4))
     for match in matches:
         print(match['match_number'])
-        print(match['blue']['team_keys'], match['blue']["score"])
-        print(match['red']['team_keys'], match['red']['score'])
+        print(match['alliances']['blue']['team_keys'], match['alliances']['blue']["score"])
+        print(match['alliances']['red']['team_keys'], match['alliances']['red']['score'])
         
     
