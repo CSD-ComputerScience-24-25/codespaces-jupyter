@@ -9,7 +9,7 @@ cursor = conn.cursor()
 
 while True : 
 
-    command = input ('enter command')
+    command = input ('enter command: ')
 
     if command == "Done" :
         cursor.close()
