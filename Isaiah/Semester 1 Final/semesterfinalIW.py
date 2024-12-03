@@ -2,7 +2,7 @@ import sqlite3
 
 db = "WEBBstore.sqlite"
 conn = sqlite3.connect(db)
-cur = conn.cursor()
+cur = conn.cursor
 
 while True:
     command = input("Enter an sqlite command: ")
