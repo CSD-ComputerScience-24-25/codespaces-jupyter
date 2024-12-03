@@ -127,6 +127,7 @@ Here are some tips to help you succeed in building your Python and SQLite projec
 - [SQLite Tutorial](https://www.sqlitetutorial.net/)
 - [Python SQLite Documentation](https://docs.python.org/3/library/sqlite3.html)
 - [Tabulate Documentation](https://pypi.org/project/tabulate/)
+- [SQL Query Compiler](https://sqliteonline.com/)
 
 ---
 
