@@ -1,7 +1,7 @@
 import sqlite3
 
 # Path to your SQLite database
-db_path = "Reese/Final.sqlite"
+db_path = "/Users/reesedelaney/Downloads/codespaces-jupyter-main/Reese/Semester 1 Final/Reese\Final.sqlite"
 table_name = "inventory"  # Replace with the name of the table you're verifying
 
 def verify_database():

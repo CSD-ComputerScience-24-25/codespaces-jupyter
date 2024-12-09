@@ -1,22 +1,31 @@
 import sqlite3
+from datetime import datetime
 
-# Path to your SQLite database
-db_path = 'Reese/Final.sqlite'
+db_path = "/workspaces/codespaces-jupyter/Reese/Semester 1 Final/Reese\Final.sqlite"  # Update with your actual file path
 
 # Connect to the database
-conn = sqlite3.connect(db_path)
-cursor = conn.cursor()
+connection = sqlite3.connect(db_path)
+cursor = connection.cursor()
 
-# Insert sample data into 'inventory'
-cursor.execute("INSERT INTO inventory (item_id, name, price, quantity) VALUES (1, 'Apple', 0.5, 100);")
-cursor.execute("INSERT INTO inventory (item_id, name, price, quantity) VALUES (2, 'Banana', 0.3, 200);")
+# SQL statement to create the Transactions table
+create_table_sql = """
+CREATE TABLE IF NOT EXISTS Transactions (
+    transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    item_id INTEGER NOT NULL,
+    transaction_type TEXT NOT NULL,
+    quantity INTEGER NOT NULL,
+    transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (item_id) REFERENCES Inventory(item_id)
+);
+"""
 
-# Insert sample data into 'transactions'
-cursor.execute("INSERT INTO transactions (transaction_id, item_id, type, quantity, date) VALUES (1, 1, 'sale', 10, '2024-12-03');")
-cursor.execute("INSERT INTO transactions (transaction_id, item_id, type, quantity, date) VALUES (2, 2, 'purchase', 50, '2024-12-02');")
-
-# Commit and close
-conn.commit()
-conn.close()
-
-print("Sample data inserted successfully!")
+try:
+    # Execute the statement
+    cursor.execute(create_table_sql)
+    connection.commit()
+    print("Transactions table created successfully.")
+except Exception as e:
+    connection.rollback()
+    print(f"An error occurred: {e}")
+finally:
+    connection.close()

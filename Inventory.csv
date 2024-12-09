@@ -1,0 +1,1000 @@
+item_id,name,price,quantity
+1,Apple,0.5,100
+2,Banana,0.3,200
+3,Orange,0.77,250
+4,Grapes,2.1,180
+5,Mango,1.5,120
+6,Pineapple,3,75
+7,Watermelon,4.5,60
+8,Strawberry,2.75,200
+9,Blueberry,3.25,150
+10,Raspberry,4,100
+11,Lemon,0.25,300
+12,Lime,0.2,250
+13,Peach,1.8,90
+14,Pear,1.25,170
+15,Cherry,2.85,80
+16,Kiwi,1,140
+17,Avocado,1.5,130
+18,Plum,1.35,100
+19,Fig,2.5,50
+20,Papaya,3.5,60
+21,Coconut,2,40
+22,Dragon Fruit,5,30
+23,Pomegranate,2.75,80
+24,Nectarine,1.9,110
+25,Apricot,1.75,90
+26,Cantaloupe,3.2,45
+27,Honeydew,3,50
+28,Cranberry,4.25,70
+29,Grapefruit,1.2,60
+30,Blackberries,3.5,110
+31,Guava,2.25,80
+32,Starfruit,4,30
+33,Passion Fruit,3.75,25
+34,Persimmon,2.5,60
+35,Lychee,3.2,90
+36,Kumquat,2.1,85
+37,Dates,4.5,50
+38,Prunes,3,70
+39,Tangerine,0.85,180
+40,Clementine,0.95,190
+41,Mulberry,3.25,100
+42,Gooseberry,2.95,60
+43,Quince,1.8,50
+44,Rambutan,5.25,40
+45,Jackfruit,1.75,35
+46,Durian,8.5,10
+47,Soursop,6,15
+48,Custard Apple,3.75,20
+49,Tamarind,2.1,55
+50,Elderberry,4.75,30
+51,Almonds,3.5,100
+52,Walnuts,4.25,80
+53,Cashews,5,90
+54,Pistachios,6,70
+55,Macadamia Nuts,8.5,50
+56,Sunflower Seeds,2.75,120
+57,Pumpkin Seeds,3,110
+58,Flaxseeds,2.2,150
+59,Chia Seeds,2.8,140
+60,Sesame Seeds,3.1,130
+61,Basil,1.25,200
+62,Parsley,1.1,210
+63,Cilantro,1,220
+64,Mint,1.5,190
+65,Dill,1.3,180
+66,Rosemary,1.75,150
+67,Thyme,1.6,170
+68,Sage,1.8,160
+69,Oregano,1.4,180
+70,Tarragon,1.7,140
+71,Garlic,0.5,300
+72,Ginger,0.75,270
+73,Turmeric,1.25,150
+74,Onion,0.4,350
+75,Shallot,0.6,280
+76,Scallion,0.45,290
+77,Leek,0.85,260
+78,Potato,0.25,400
+79,Sweet Potato,0.5,320
+80,Carrot,0.3,370
+81,Radish,0.35,340
+82,Beetroot,0.55,330
+83,Parsnip,0.75,310
+84,Turnip,0.65,300
+85,Cauliflower,2,250
+86,Broccoli,2.25,240
+87,Cabbage,1.5,280
+88,Lettuce,1.25,270
+89,Spinach,1.6,260
+90,Kale,1.75,250
+91,Arugula,1.2,240
+92,Celery,0.9,300
+93,Zucchini,0.8,290
+94,Cucumber,0.75,280
+95,Tomato,0.65,370
+96,Cherry Tomato,0.85,350
+97,Bell Pepper,1.5,310
+98,Jalapeno,1,220
+99,Chili Pepper,1.25,210
+100,Eggplant,1.8,150
+101,Mushroom,2.5,200
+102,Asparagus,3.75,100
+103,Corn,1.25,250
+104,Green Beans,1.5,200
+105,Peas,1.25,300
+106,Okra,1.75,170
+107,Squash,2,180
+108,Pumpkin,2.75,150
+1,Apple,0.5,100
+2,Banana,0.3,200
+3,Orange,0.77,250
+4,Grapes,2.1,180
+5,Mango,1.5,120
+6,Pineapple,3,75
+7,Watermelon,4.5,60
+8,Strawberry,2.75,200
+9,Blueberry,3.25,150
+10,Raspberry,4,100
+11,Lemon,0.25,300
+12,Lime,0.2,250
+13,Peach,1.8,90
+14,Pear,1.25,170
+15,Cherry,2.85,80
+16,Kiwi,1,140
+17,Avocado,1.5,130
+18,Plum,1.35,100
+19,Fig,2.5,50
+20,Papaya,3.5,60
+21,Coconut,2,40
+22,Dragon Fruit,5,30
+23,Pomegranate,2.75,80
+24,Nectarine,1.9,110
+25,Apricot,1.75,90
+26,Cantaloupe,3.2,45
+27,Honeydew,3,50
+28,Cranberry,4.25,70
+29,Grapefruit,1.2,60
+30,Blackberries,3.5,110
+31,Guava,2.25,80
+32,Starfruit,4,30
+33,Passion Fruit,3.75,25
+34,Persimmon,2.5,60
+35,Lychee,3.2,90
+36,Kumquat,2.1,85
+37,Dates,4.5,50
+38,Prunes,3,70
+39,Tangerine,0.85,180
+40,Clementine,0.95,190
+41,Mulberry,3.25,100
+42,Gooseberry,2.95,60
+43,Quince,1.8,50
+44,Rambutan,5.25,40
+45,Jackfruit,1.75,35
+46,Durian,8.5,10
+47,Soursop,6,15
+48,Custard Apple,3.75,20
+49,Tamarind,2.1,55
+50,Elderberry,4.75,30
+51,Almonds,3.5,100
+52,Walnuts,4.25,80
+53,Cashews,5,90
+54,Pistachios,6,70
+55,Macadamia Nuts,8.5,50
+56,Sunflower Seeds,2.75,120
+57,Pumpkin Seeds,3,110
+58,Flaxseeds,2.2,150
+59,Chia Seeds,2.8,140
+60,Sesame Seeds,3.1,130
+61,Basil,1.25,200
+62,Parsley,1.1,210
+63,Cilantro,1,220
+64,Mint,1.5,190
+65,Dill,1.3,180
+66,Rosemary,1.75,150
+67,Thyme,1.6,170
+68,Sage,1.8,160
+69,Oregano,1.4,180
+70,Tarragon,1.7,140
+71,Garlic,0.5,300
+72,Ginger,0.75,270
+73,Turmeric,1.25,150
+74,Onion,0.4,350
+75,Shallot,0.6,280
+76,Scallion,0.45,290
+77,Leek,0.85,260
+78,Potato,0.25,400
+79,Sweet Potato,0.5,320
+80,Carrot,0.3,370
+81,Radish,0.35,340
+82,Beetroot,0.55,330
+83,Parsnip,0.75,310
+84,Turnip,0.65,300
+85,Cauliflower,2,250
+86,Broccoli,2.25,240
+87,Cabbage,1.5,280
+88,Lettuce,1.25,270
+89,Spinach,1.6,260
+90,Kale,1.75,250
+91,Arugula,1.2,240
+92,Celery,0.9,300
+93,Zucchini,0.8,290
+94,Cucumber,0.75,280
+95,Tomato,0.65,370
+96,Cherry Tomato,0.85,350
+97,Bell Pepper,1.5,310
+98,Jalapeno,1,220
+99,Chili Pepper,1.25,210
+100,Eggplant,1.8,150
+101,Mushroom,2.5,200
+102,Asparagus,3.75,100
+103,Corn,1.25,250
+104,Green Beans,1.5,200
+105,Peas,1.25,300
+106,Okra,1.75,170
+107,Squash,2,180
+108,Pumpkin,2.75,150
+1,Apple,0.5,100
+2,Banana,0.3,200
+3,Orange,0.77,250
+4,Grapes,2.1,180
+5,Mango,1.5,120
+6,Pineapple,3,75
+7,Watermelon,4.5,60
+8,Strawberry,2.75,200
+9,Blueberry,3.25,150
+10,Raspberry,4,100
+11,Lemon,0.25,300
+12,Lime,0.2,250
+13,Peach,1.8,90
+14,Pear,1.25,170
+15,Cherry,2.85,80
+16,Kiwi,1,140
+17,Avocado,1.5,130
+18,Plum,1.35,100
+19,Fig,2.5,50
+20,Papaya,3.5,60
+21,Coconut,2,40
+22,Dragon Fruit,5,30
+23,Pomegranate,2.75,80
+24,Nectarine,1.9,110
+25,Apricot,1.75,90
+26,Cantaloupe,3.2,45
+27,Honeydew,3,50
+28,Cranberry,4.25,70
+29,Grapefruit,1.2,60
+30,Blackberries,3.5,110
+31,Guava,2.25,80
+32,Starfruit,4,30
+33,Passion Fruit,3.75,25
+34,Persimmon,2.5,60
+35,Lychee,3.2,90
+36,Kumquat,2.1,85
+37,Dates,4.5,50
+38,Prunes,3,70
+39,Tangerine,0.85,180
+40,Clementine,0.95,190
+41,Mulberry,3.25,100
+42,Gooseberry,2.95,60
+43,Quince,1.8,50
+44,Rambutan,5.25,40
+45,Jackfruit,1.75,35
+46,Durian,8.5,10
+47,Soursop,6,15
+48,Custard Apple,3.75,20
+49,Tamarind,2.1,55
+50,Elderberry,4.75,30
+51,Almonds,3.5,100
+52,Walnuts,4.25,80
+53,Cashews,5,90
+54,Pistachios,6,70
+55,Macadamia Nuts,8.5,50
+56,Sunflower Seeds,2.75,120
+57,Pumpkin Seeds,3,110
+58,Flaxseeds,2.2,150
+59,Chia Seeds,2.8,140
+60,Sesame Seeds,3.1,130
+61,Basil,1.25,200
+62,Parsley,1.1,210
+63,Cilantro,1,220
+64,Mint,1.5,190
+65,Dill,1.3,180
+66,Rosemary,1.75,150
+67,Thyme,1.6,170
+68,Sage,1.8,160
+69,Oregano,1.4,180
+70,Tarragon,1.7,140
+71,Garlic,0.5,300
+72,Ginger,0.75,270
+73,Turmeric,1.25,150
+74,Onion,0.4,350
+75,Shallot,0.6,280
+76,Scallion,0.45,290
+77,Leek,0.85,260
+78,Potato,0.25,400
+79,Sweet Potato,0.5,320
+80,Carrot,0.3,370
+81,Radish,0.35,340
+82,Beetroot,0.55,330
+83,Parsnip,0.75,310
+84,Turnip,0.65,300
+85,Cauliflower,2,250
+86,Broccoli,2.25,240
+87,Cabbage,1.5,280
+88,Lettuce,1.25,270
+89,Spinach,1.6,260
+90,Kale,1.75,250
+91,Arugula,1.2,240
+92,Celery,0.9,300
+93,Zucchini,0.8,290
+94,Cucumber,0.75,280
+95,Tomato,0.65,370
+96,Cherry Tomato,0.85,350
+97,Bell Pepper,1.5,310
+98,Jalapeno,1,220
+99,Chili Pepper,1.25,210
+100,Eggplant,1.8,150
+101,Mushroom,2.5,200
+102,Asparagus,3.75,100
+103,Corn,1.25,250
+104,Green Beans,1.5,200
+105,Peas,1.25,300
+106,Okra,1.75,170
+107,Squash,2,180
+108,Pumpkin,2.75,150
+1,Apple,0.5,100
+2,Banana,0.3,200
+3,Orange,0.77,250
+4,Grapes,2.1,180
+5,Mango,1.5,120
+6,Pineapple,3,75
+7,Watermelon,4.5,60
+8,Strawberry,2.75,200
+9,Blueberry,3.25,150
+10,Raspberry,4,100
+11,Lemon,0.25,300
+12,Lime,0.2,250
+13,Peach,1.8,90
+14,Pear,1.25,170
+15,Cherry,2.85,80
+16,Kiwi,1,140
+17,Avocado,1.5,130
+18,Plum,1.35,100
+19,Fig,2.5,50
+20,Papaya,3.5,60
+21,Coconut,2,40
+22,Dragon Fruit,5,30
+23,Pomegranate,2.75,80
+24,Nectarine,1.9,110
+25,Apricot,1.75,90
+26,Cantaloupe,3.2,45
+27,Honeydew,3,50
+28,Cranberry,4.25,70
+29,Grapefruit,1.2,60
+30,Blackberries,3.5,110
+31,Guava,2.25,80
+32,Starfruit,4,30
+33,Passion Fruit,3.75,25
+34,Persimmon,2.5,60
+35,Lychee,3.2,90
+36,Kumquat,2.1,85
+37,Dates,4.5,50
+38,Prunes,3,70
+39,Tangerine,0.85,180
+40,Clementine,0.95,190
+41,Mulberry,3.25,100
+42,Gooseberry,2.95,60
+43,Quince,1.8,50
+44,Rambutan,5.25,40
+45,Jackfruit,1.75,35
+46,Durian,8.5,10
+47,Soursop,6,15
+48,Custard Apple,3.75,20
+49,Tamarind,2.1,55
+50,Elderberry,4.75,30
+51,Almonds,3.5,100
+52,Walnuts,4.25,80
+53,Cashews,5,90
+54,Pistachios,6,70
+55,Macadamia Nuts,8.5,50
+56,Sunflower Seeds,2.75,120
+57,Pumpkin Seeds,3,110
+58,Flaxseeds,2.2,150
+59,Chia Seeds,2.8,140
+60,Sesame Seeds,3.1,130
+61,Basil,1.25,200
+62,Parsley,1.1,210
+63,Cilantro,1,220
+64,Mint,1.5,190
+65,Dill,1.3,180
+66,Rosemary,1.75,150
+67,Thyme,1.6,170
+68,Sage,1.8,160
+69,Oregano,1.4,180
+70,Tarragon,1.7,140
+71,Garlic,0.5,300
+72,Ginger,0.75,270
+73,Turmeric,1.25,150
+74,Onion,0.4,350
+75,Shallot,0.6,280
+76,Scallion,0.45,290
+77,Leek,0.85,260
+78,Potato,0.25,400
+79,Sweet Potato,0.5,320
+80,Carrot,0.3,370
+81,Radish,0.35,340
+82,Beetroot,0.55,330
+83,Parsnip,0.75,310
+84,Turnip,0.65,300
+85,Cauliflower,2,250
+86,Broccoli,2.25,240
+87,Cabbage,1.5,280
+88,Lettuce,1.25,270
+89,Spinach,1.6,260
+90,Kale,1.75,250
+91,Arugula,1.2,240
+92,Celery,0.9,300
+93,Zucchini,0.8,290
+94,Cucumber,0.75,280
+95,Tomato,0.65,370
+96,Cherry Tomato,0.85,350
+97,Bell Pepper,1.5,310
+98,Jalapeno,1,220
+99,Chili Pepper,1.25,210
+100,Eggplant,1.8,150
+101,Mushroom,2.5,200
+102,Asparagus,3.75,100
+103,Corn,1.25,250
+104,Green Beans,1.5,200
+105,Peas,1.25,300
+106,Okra,1.75,170
+107,Squash,2,180
+108,Pumpkin,2.75,150
+1,Apple,0.5,100
+2,Banana,0.3,200
+3,Orange,0.77,250
+4,Grapes,2.1,180
+5,Mango,1.5,120
+6,Pineapple,3,75
+7,Watermelon,4.5,60
+8,Strawberry,2.75,200
+9,Blueberry,3.25,150
+10,Raspberry,4,100
+11,Lemon,0.25,300
+12,Lime,0.2,250
+13,Peach,1.8,90
+14,Pear,1.25,170
+15,Cherry,2.85,80
+16,Kiwi,1,140
+17,Avocado,1.5,130
+18,Plum,1.35,100
+19,Fig,2.5,50
+20,Papaya,3.5,60
+21,Coconut,2,40
+22,Dragon Fruit,5,30
+23,Pomegranate,2.75,80
+24,Nectarine,1.9,110
+25,Apricot,1.75,90
+26,Cantaloupe,3.2,45
+27,Honeydew,3,50
+28,Cranberry,4.25,70
+29,Grapefruit,1.2,60
+30,Blackberries,3.5,110
+31,Guava,2.25,80
+32,Starfruit,4,30
+33,Passion Fruit,3.75,25
+34,Persimmon,2.5,60
+35,Lychee,3.2,90
+36,Kumquat,2.1,85
+37,Dates,4.5,50
+38,Prunes,3,70
+39,Tangerine,0.85,180
+40,Clementine,0.95,190
+41,Mulberry,3.25,100
+42,Gooseberry,2.95,60
+43,Quince,1.8,50
+44,Rambutan,5.25,40
+45,Jackfruit,1.75,35
+46,Durian,8.5,10
+47,Soursop,6,15
+48,Custard Apple,3.75,20
+49,Tamarind,2.1,55
+50,Elderberry,4.75,30
+51,Almonds,3.5,100
+52,Walnuts,4.25,80
+53,Cashews,5,90
+54,Pistachios,6,70
+55,Macadamia Nuts,8.5,50
+56,Sunflower Seeds,2.75,120
+57,Pumpkin Seeds,3,110
+58,Flaxseeds,2.2,150
+59,Chia Seeds,2.8,140
+60,Sesame Seeds,3.1,130
+61,Basil,1.25,200
+62,Parsley,1.1,210
+63,Cilantro,1,220
+64,Mint,1.5,190
+65,Dill,1.3,180
+66,Rosemary,1.75,150
+67,Thyme,1.6,170
+68,Sage,1.8,160
+69,Oregano,1.4,180
+70,Tarragon,1.7,140
+71,Garlic,0.5,300
+72,Ginger,0.75,270
+73,Turmeric,1.25,150
+74,Onion,0.4,350
+75,Shallot,0.6,280
+76,Scallion,0.45,290
+77,Leek,0.85,260
+78,Potato,0.25,400
+79,Sweet Potato,0.5,320
+80,Carrot,0.3,370
+81,Radish,0.35,340
+82,Beetroot,0.55,330
+83,Parsnip,0.75,310
+84,Turnip,0.65,300
+85,Cauliflower,2,250
+86,Broccoli,2.25,240
+87,Cabbage,1.5,280
+88,Lettuce,1.25,270
+89,Spinach,1.6,260
+90,Kale,1.75,250
+91,Arugula,1.2,240
+92,Celery,0.9,300
+93,Zucchini,0.8,290
+94,Cucumber,0.75,280
+95,Tomato,0.65,370
+96,Cherry Tomato,0.85,350
+97,Bell Pepper,1.5,310
+98,Jalapeno,1,220
+99,Chili Pepper,1.25,210
+100,Eggplant,1.8,150
+101,Mushroom,2.5,200
+102,Asparagus,3.75,100
+103,Corn,1.25,250
+104,Green Beans,1.5,200
+105,Peas,1.25,300
+106,Okra,1.75,170
+107,Squash,2,180
+108,Pumpkin,2.75,150
+1,Apple,0.5,100
+2,Banana,0.3,200
+3,Orange,0.77,250
+4,Grapes,2.1,180
+5,Mango,1.5,120
+6,Pineapple,3,75
+7,Watermelon,4.5,60
+8,Strawberry,2.75,200
+9,Blueberry,3.25,150
+10,Raspberry,4,100
+11,Lemon,0.25,300
+12,Lime,0.2,250
+13,Peach,1.8,90
+14,Pear,1.25,170
+15,Cherry,2.85,80
+16,Kiwi,1,140
+17,Avocado,1.5,130
+18,Plum,1.35,100
+19,Fig,2.5,50
+20,Papaya,3.5,60
+21,Coconut,2,40
+22,Dragon Fruit,5,30
+23,Pomegranate,2.75,80
+24,Nectarine,1.9,110
+25,Apricot,1.75,90
+26,Cantaloupe,3.2,45
+27,Honeydew,3,50
+28,Cranberry,4.25,70
+29,Grapefruit,1.2,60
+30,Blackberries,3.5,110
+31,Guava,2.25,80
+32,Starfruit,4,30
+33,Passion Fruit,3.75,25
+34,Persimmon,2.5,60
+35,Lychee,3.2,90
+36,Kumquat,2.1,85
+37,Dates,4.5,50
+38,Prunes,3,70
+39,Tangerine,0.85,180
+40,Clementine,0.95,190
+41,Mulberry,3.25,100
+42,Gooseberry,2.95,60
+43,Quince,1.8,50
+44,Rambutan,5.25,40
+45,Jackfruit,1.75,35
+46,Durian,8.5,10
+47,Soursop,6,15
+48,Custard Apple,3.75,20
+49,Tamarind,2.1,55
+50,Elderberry,4.75,30
+51,Almonds,3.5,100
+52,Walnuts,4.25,80
+53,Cashews,5,90
+54,Pistachios,6,70
+55,Macadamia Nuts,8.5,50
+56,Sunflower Seeds,2.75,120
+57,Pumpkin Seeds,3,110
+58,Flaxseeds,2.2,150
+59,Chia Seeds,2.8,140
+60,Sesame Seeds,3.1,130
+61,Basil,1.25,200
+62,Parsley,1.1,210
+63,Cilantro,1,220
+64,Mint,1.5,190
+65,Dill,1.3,180
+66,Rosemary,1.75,150
+67,Thyme,1.6,170
+68,Sage,1.8,160
+69,Oregano,1.4,180
+70,Tarragon,1.7,140
+71,Garlic,0.5,300
+72,Ginger,0.75,270
+73,Turmeric,1.25,150
+74,Onion,0.4,350
+75,Shallot,0.6,280
+76,Scallion,0.45,290
+77,Leek,0.85,260
+78,Potato,0.25,400
+79,Sweet Potato,0.5,320
+80,Carrot,0.3,370
+81,Radish,0.35,340
+82,Beetroot,0.55,330
+83,Parsnip,0.75,310
+84,Turnip,0.65,300
+85,Cauliflower,2,250
+86,Broccoli,2.25,240
+87,Cabbage,1.5,280
+88,Lettuce,1.25,270
+89,Spinach,1.6,260
+90,Kale,1.75,250
+91,Arugula,1.2,240
+92,Celery,0.9,300
+93,Zucchini,0.8,290
+94,Cucumber,0.75,280
+95,Tomato,0.65,370
+96,Cherry Tomato,0.85,350
+97,Bell Pepper,1.5,310
+98,Jalapeno,1,220
+99,Chili Pepper,1.25,210
+100,Eggplant,1.8,150
+101,Mushroom,2.5,200
+102,Asparagus,3.75,100
+103,Corn,1.25,250
+104,Green Beans,1.5,200
+105,Peas,1.25,300
+106,Okra,1.75,170
+107,Squash,2,180
+108,Pumpkin,2.75,150
+1,Apple,0.5,100
+2,Banana,0.3,200
+3,Orange,0.77,250
+4,Grapes,2.1,180
+5,Mango,1.5,120
+6,Pineapple,3,75
+7,Watermelon,4.5,60
+8,Strawberry,2.75,200
+9,Blueberry,3.25,150
+10,Raspberry,4,100
+11,Lemon,0.25,300
+12,Lime,0.2,250
+13,Peach,1.8,90
+14,Pear,1.25,170
+15,Cherry,2.85,80
+16,Kiwi,1,140
+17,Avocado,1.5,130
+18,Plum,1.35,100
+19,Fig,2.5,50
+20,Papaya,3.5,60
+21,Coconut,2,40
+22,Dragon Fruit,5,30
+23,Pomegranate,2.75,80
+24,Nectarine,1.9,110
+25,Apricot,1.75,90
+26,Cantaloupe,3.2,45
+27,Honeydew,3,50
+28,Cranberry,4.25,70
+29,Grapefruit,1.2,60
+30,Blackberries,3.5,110
+31,Guava,2.25,80
+32,Starfruit,4,30
+33,Passion Fruit,3.75,25
+34,Persimmon,2.5,60
+35,Lychee,3.2,90
+36,Kumquat,2.1,85
+37,Dates,4.5,50
+38,Prunes,3,70
+39,Tangerine,0.85,180
+40,Clementine,0.95,190
+41,Mulberry,3.25,100
+42,Gooseberry,2.95,60
+43,Quince,1.8,50
+44,Rambutan,5.25,40
+45,Jackfruit,1.75,35
+46,Durian,8.5,10
+47,Soursop,6,15
+48,Custard Apple,3.75,20
+49,Tamarind,2.1,55
+50,Elderberry,4.75,30
+51,Almonds,3.5,100
+52,Walnuts,4.25,80
+53,Cashews,5,90
+54,Pistachios,6,70
+55,Macadamia Nuts,8.5,50
+56,Sunflower Seeds,2.75,120
+57,Pumpkin Seeds,3,110
+58,Flaxseeds,2.2,150
+59,Chia Seeds,2.8,140
+60,Sesame Seeds,3.1,130
+61,Basil,1.25,200
+62,Parsley,1.1,210
+63,Cilantro,1,220
+64,Mint,1.5,190
+65,Dill,1.3,180
+66,Rosemary,1.75,150
+67,Thyme,1.6,170
+68,Sage,1.8,160
+69,Oregano,1.4,180
+70,Tarragon,1.7,140
+71,Garlic,0.5,300
+72,Ginger,0.75,270
+73,Turmeric,1.25,150
+74,Onion,0.4,350
+75,Shallot,0.6,280
+76,Scallion,0.45,290
+77,Leek,0.85,260
+78,Potato,0.25,400
+79,Sweet Potato,0.5,320
+80,Carrot,0.3,370
+81,Radish,0.35,340
+82,Beetroot,0.55,330
+83,Parsnip,0.75,310
+84,Turnip,0.65,300
+85,Cauliflower,2,250
+86,Broccoli,2.25,240
+87,Cabbage,1.5,280
+88,Lettuce,1.25,270
+89,Spinach,1.6,260
+90,Kale,1.75,250
+91,Arugula,1.2,240
+92,Celery,0.9,300
+93,Zucchini,0.8,290
+94,Cucumber,0.75,280
+95,Tomato,0.65,370
+96,Cherry Tomato,0.85,350
+97,Bell Pepper,1.5,310
+98,Jalapeno,1,220
+99,Chili Pepper,1.25,210
+100,Eggplant,1.8,150
+101,Mushroom,2.5,200
+102,Asparagus,3.75,100
+103,Corn,1.25,250
+104,Green Beans,1.5,200
+105,Peas,1.25,300
+106,Okra,1.75,170
+107,Squash,2,180
+108,Pumpkin,2.75,150
+1,Apple,0.5,100
+2,Banana,0.3,200
+3,Orange,0.77,250
+4,Grapes,2.1,180
+5,Mango,1.5,120
+6,Pineapple,3,75
+7,Watermelon,4.5,60
+8,Strawberry,2.75,200
+9,Blueberry,3.25,150
+10,Raspberry,4,100
+11,Lemon,0.25,300
+12,Lime,0.2,250
+13,Peach,1.8,90
+14,Pear,1.25,170
+15,Cherry,2.85,80
+16,Kiwi,1,140
+17,Avocado,1.5,130
+18,Plum,1.35,100
+19,Fig,2.5,50
+20,Papaya,3.5,60
+21,Coconut,2,40
+22,Dragon Fruit,5,30
+23,Pomegranate,2.75,80
+24,Nectarine,1.9,110
+25,Apricot,1.75,90
+26,Cantaloupe,3.2,45
+27,Honeydew,3,50
+28,Cranberry,4.25,70
+29,Grapefruit,1.2,60
+30,Blackberries,3.5,110
+31,Guava,2.25,80
+32,Starfruit,4,30
+33,Passion Fruit,3.75,25
+34,Persimmon,2.5,60
+35,Lychee,3.2,90
+36,Kumquat,2.1,85
+37,Dates,4.5,50
+38,Prunes,3,70
+39,Tangerine,0.85,180
+40,Clementine,0.95,190
+41,Mulberry,3.25,100
+42,Gooseberry,2.95,60
+43,Quince,1.8,50
+44,Rambutan,5.25,40
+45,Jackfruit,1.75,35
+46,Durian,8.5,10
+47,Soursop,6,15
+48,Custard Apple,3.75,20
+49,Tamarind,2.1,55
+50,Elderberry,4.75,30
+51,Almonds,3.5,100
+52,Walnuts,4.25,80
+53,Cashews,5,90
+54,Pistachios,6,70
+55,Macadamia Nuts,8.5,50
+56,Sunflower Seeds,2.75,120
+57,Pumpkin Seeds,3,110
+58,Flaxseeds,2.2,150
+59,Chia Seeds,2.8,140
+60,Sesame Seeds,3.1,130
+61,Basil,1.25,200
+62,Parsley,1.1,210
+63,Cilantro,1,220
+64,Mint,1.5,190
+65,Dill,1.3,180
+66,Rosemary,1.75,150
+67,Thyme,1.6,170
+68,Sage,1.8,160
+69,Oregano,1.4,180
+70,Tarragon,1.7,140
+71,Garlic,0.5,300
+72,Ginger,0.75,270
+73,Turmeric,1.25,150
+74,Onion,0.4,350
+75,Shallot,0.6,280
+76,Scallion,0.45,290
+77,Leek,0.85,260
+78,Potato,0.25,400
+79,Sweet Potato,0.5,320
+80,Carrot,0.3,370
+81,Radish,0.35,340
+82,Beetroot,0.55,330
+83,Parsnip,0.75,310
+84,Turnip,0.65,300
+85,Cauliflower,2,250
+86,Broccoli,2.25,240
+87,Cabbage,1.5,280
+88,Lettuce,1.25,270
+89,Spinach,1.6,260
+90,Kale,1.75,250
+91,Arugula,1.2,240
+92,Celery,0.9,300
+93,Zucchini,0.8,290
+94,Cucumber,0.75,280
+95,Tomato,0.65,370
+96,Cherry Tomato,0.85,350
+97,Bell Pepper,1.5,310
+98,Jalapeno,1,220
+99,Chili Pepper,1.25,210
+100,Eggplant,1.8,150
+101,Mushroom,2.5,200
+102,Asparagus,3.75,100
+103,Corn,1.25,250
+104,Green Beans,1.5,200
+105,Peas,1.25,300
+106,Okra,1.75,170
+107,Squash,2,180
+108,Pumpkin,2.75,150
+1,Apple,0.5,100
+2,Banana,0.3,200
+3,Orange,0.77,250
+4,Grapes,2.1,180
+5,Mango,1.5,120
+6,Pineapple,3,75
+7,Watermelon,4.5,60
+8,Strawberry,2.75,200
+9,Blueberry,3.25,150
+10,Raspberry,4,100
+11,Lemon,0.25,300
+12,Lime,0.2,250
+13,Peach,1.8,90
+14,Pear,1.25,170
+15,Cherry,2.85,80
+16,Kiwi,1,140
+17,Avocado,1.5,130
+18,Plum,1.35,100
+19,Fig,2.5,50
+20,Papaya,3.5,60
+21,Coconut,2,40
+22,Dragon Fruit,5,30
+23,Pomegranate,2.75,80
+24,Nectarine,1.9,110
+25,Apricot,1.75,90
+26,Cantaloupe,3.2,45
+27,Honeydew,3,50
+28,Cranberry,4.25,70
+29,Grapefruit,1.2,60
+30,Blackberries,3.5,110
+31,Guava,2.25,80
+32,Starfruit,4,30
+33,Passion Fruit,3.75,25
+34,Persimmon,2.5,60
+35,Lychee,3.2,90
+36,Kumquat,2.1,85
+37,Dates,4.5,50
+38,Prunes,3,70
+39,Tangerine,0.85,180
+40,Clementine,0.95,190
+41,Mulberry,3.25,100
+42,Gooseberry,2.95,60
+43,Quince,1.8,50
+44,Rambutan,5.25,40
+45,Jackfruit,1.75,35
+46,Durian,8.5,10
+47,Soursop,6,15
+48,Custard Apple,3.75,20
+49,Tamarind,2.1,55
+50,Elderberry,4.75,30
+51,Almonds,3.5,100
+52,Walnuts,4.25,80
+53,Cashews,5,90
+54,Pistachios,6,70
+55,Macadamia Nuts,8.5,50
+56,Sunflower Seeds,2.75,120
+57,Pumpkin Seeds,3,110
+58,Flaxseeds,2.2,150
+59,Chia Seeds,2.8,140
+60,Sesame Seeds,3.1,130
+61,Basil,1.25,200
+62,Parsley,1.1,210
+63,Cilantro,1,220
+64,Mint,1.5,190
+65,Dill,1.3,180
+66,Rosemary,1.75,150
+67,Thyme,1.6,170
+68,Sage,1.8,160
+69,Oregano,1.4,180
+70,Tarragon,1.7,140
+71,Garlic,0.5,300
+72,Ginger,0.75,270
+73,Turmeric,1.25,150
+74,Onion,0.4,350
+75,Shallot,0.6,280
+76,Scallion,0.45,290
+77,Leek,0.85,260
+78,Potato,0.25,400
+79,Sweet Potato,0.5,320
+80,Carrot,0.3,370
+81,Radish,0.35,340
+82,Beetroot,0.55,330
+83,Parsnip,0.75,310
+84,Turnip,0.65,300
+85,Cauliflower,2,250
+86,Broccoli,2.25,240
+87,Cabbage,1.5,280
+88,Lettuce,1.25,270
+89,Spinach,1.6,260
+90,Kale,1.75,250
+91,Arugula,1.2,240
+92,Celery,0.9,300
+93,Zucchini,0.8,290
+94,Cucumber,0.75,280
+95,Tomato,0.65,370
+96,Cherry Tomato,0.85,350
+97,Bell Pepper,1.5,310
+98,Jalapeno,1,220
+99,Chili Pepper,1.25,210
+100,Eggplant,1.8,150
+101,Mushroom,2.5,200
+102,Asparagus,3.75,100
+103,Corn,1.25,250
+104,Green Beans,1.5,200
+105,Peas,1.25,300
+106,Okra,1.75,170
+107,Squash,2,180
+108,Pumpkin,2.75,150
+1,Apple,0.5,100
+2,Banana,0.3,200
+3,Orange,0.77,250
+4,Grapes,2.1,180
+5,Mango,1.5,120
+6,Pineapple,3,75
+7,Watermelon,4.5,60
+8,Strawberry,2.75,200
+9,Blueberry,3.25,150
+10,Raspberry,4,100
+11,Lemon,0.25,300
+12,Lime,0.2,250
+13,Peach,1.8,90
+14,Pear,1.25,170
+15,Cherry,2.85,80
+16,Kiwi,1,140
+17,Avocado,1.5,130
+18,Plum,1.35,100
+19,Fig,2.5,50
+20,Papaya,3.5,60
+21,Coconut,2,40
+22,Dragon Fruit,5,30
+23,Pomegranate,2.75,80
+24,Nectarine,1.9,110
+25,Apricot,1.75,90
+26,Cantaloupe,3.2,45
+27,Honeydew,3,50
