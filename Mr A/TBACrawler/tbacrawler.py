@@ -42,6 +42,7 @@ class TBA_Crawler():
         params = {"X-TBA-Auth-Key": self.AuthKey, "H":"accept: application/json"}
 
         response = requests.get(api_url, params=params)
+        return response.json()
 
         if response.status_code == 200:
             data = response.json()
@@ -53,11 +54,20 @@ class TBA_Crawler():
         else: print('No Response')
 
     def check_team(self, team_key: str):
-        if self.db.get_team(team_key):
+        if self.db.check_team(team_key):
             pass
         else:
-            self.getTeamInfo(team_key)
-            #db.add_team()
+            data = self.getTeamInfo(team_key)
+            self.db.add_team(data["team_key"],
+                             data['city'],
+                             data['country'],
+                             data['nickname'],
+                             data['postal_code'],
+                             data['rookie_year'],
+                             data['school_name'],
+                             data['state_prov'],
+                             data['team_number'],
+                             data['website'])
 
 
         
