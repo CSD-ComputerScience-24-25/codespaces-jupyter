@@ -4,10 +4,10 @@ import sqlite3
 import time
 
 # Configuration
-JSON_KEYFILE = '/workspaces/codespaces-jupyter/Reese/Semester 1 Final/service-account.json'  # Path to your service account JSON key file
-DB_NAME = '/workspaces/codespaces-jupyter/Reese/Semester 1 Final/Reese\Final.sqlite'                      # Name of your SQLite database
+JSON_KEYFILE = '/Users/reesedelaney/Downloads/codespaces-jupyter-main/Reese/Semester 1 Final/service-account.json'  # Path to your service account JSON key file
+DB_NAME = '/Users/reesedelaney/Downloads/codespaces-jupyter-main/Reese/Semester 1 Final/Reese\Final.sqlite'                      # Name of your SQLite database
 SHEET_NAME = 'Grocery Store Inventory and Transactions'         # Name of your Google Sheet
-WORKSHEET_NAME = 'Inventory'                     # Worksheet/tab name in the Google Sheet
+WORKSHEET_NAME = 'sheet1'                     # Worksheet/tab name in the Google Sheet
 TABLE_NAME = 'inventory'                      # SQLite table name
 SYNC_INTERVAL = 5  # Interval in seconds between each sync
 

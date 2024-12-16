@@ -2,14 +2,14 @@ import sqlite3
 
 # Path to your SQLite database
 db_path = "/Users/reesedelaney/Downloads/codespaces-jupyter-main/Reese/Semester 1 Final/Reese\Final.sqlite"
-table_name = "inventory"  # Replace with the name of the table you're verifying
+#table_name = "Transactions"  # Replace with the name of the table you're verifying
 
 def verify_database():
     # Connect to the SQLite database
     conn = sqlite3.connect(db_path)
     
     # Query the table
-    query = f"SELECT * FROM {table_name}"
+    query = f"SELECT * FROM Transactions"
     cursor = conn.cursor()
     cursor.execute(query)
     

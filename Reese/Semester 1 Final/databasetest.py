@@ -1,31 +1,31 @@
 import sqlite3
 from datetime import datetime
+import uuid
 
-db_path = "/workspaces/codespaces-jupyter/Reese/Semester 1 Final/Reese\Final.sqlite"  # Update with your actual file path
+DB_NAME = '/Users/reesedelaney/Downloads/codespaces-jupyter-main/Reese/Semester 1 Final/Reese\Final.sqlite'
 
-# Connect to the database
-connection = sqlite3.connect(db_path)
-cursor = connection.cursor()
+def test_transaction_insert():
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
 
-# SQL statement to create the Transactions table
-create_table_sql = """
-CREATE TABLE IF NOT EXISTS Transactions (
-    transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    item_id INTEGER NOT NULL,
-    transaction_type TEXT NOT NULL,
-    quantity INTEGER NOT NULL,
-    transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (item_id) REFERENCES Inventory(item_id)
-);
-"""
+    transaction_id = str(uuid.uuid4())
+    item_id = 1  # Replace with a valid item_id in your database
+    transaction_type = 'sell'
+    quantity = 10
+    transaction_date = datetime.now()
 
-try:
-    # Execute the statement
-    cursor.execute(create_table_sql)
-    connection.commit()
-    print("Transactions table created successfully.")
-except Exception as e:
-    connection.rollback()
-    print(f"An error occurred: {e}")
-finally:
-    connection.close()
+    print(f"Testing transaction insert with UUID: {transaction_id}")
+
+    try:
+        cursor.execute("""
+            INSERT INTO Transactions (transaction_id, item_id, transaction_type, quantity, transaction_date)
+            VALUES (?, ?, ?, ?, ?)
+        """, (transaction_id, item_id, transaction_type, quantity, transaction_date))
+        conn.commit()
+        print("Transaction inserted successfully.")
+    except sqlite3.Error as e:
+        print("SQLite Error:", e)
+    finally:
+        conn.close()
+
+test_transaction_insert()
