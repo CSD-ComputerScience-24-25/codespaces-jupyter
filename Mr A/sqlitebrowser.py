@@ -1,7 +1,9 @@
-import sqlite3
+import sqlite3, os
 
-db = "MRA_Users.sqlite"
-conn = sqlite3.connect(db)
+root_directory = "Mr A/TBACrawler"
+db_name = "TheBlueDB.sqlite"
+path = os.path.join(root_directory,db_name)
+conn = sqlite3.connect(path)
 cur = conn.cursor()
 
 while True:

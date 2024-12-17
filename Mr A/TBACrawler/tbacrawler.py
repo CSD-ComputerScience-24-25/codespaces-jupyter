@@ -48,7 +48,7 @@ class TBA_Crawler():
             #db.add_team()
             #print(data)
             parsed = json.dumps(data, indent= 4)
-            print(parsed)
+            #print(parsed)
             return data
         else: print('No Response')
 
@@ -57,7 +57,7 @@ class TBA_Crawler():
             pass
         else:
             data = self.getTeamInfo(team_key)
-            print(data)
+            #print(data)
             self.db.add_team(data["key"],
                              data['city'],
                              data['country'],
