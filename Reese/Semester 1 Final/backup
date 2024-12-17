@@ -5,10 +5,13 @@ from oauth2client.service_account import ServiceAccountCredentials
 import time
 import threading
 import uuid
+import os
+import matplotlib.pyplot as plt
+
 
 # Configuration/Paths
-JSON_KEYFILE = '/Users/reesedelaney/Downloads/codespaces-jupyter-main/Reese/Semester 1 Final/service-account.json'  # Path to your service account JSON key file
-DB_NAME = '/Users/reesedelaney/Downloads/codespaces-jupyter-main/Reese/Semester 1 Final/Reese\Final.sqlite'  # Name of your SQLite database
+JSON_KEYFILE = '/workspaces/codespaces-jupyter/Reese/Semester 1 Final/service-account.json'  # Path to your service account JSON key file
+DB_NAME = '/workspaces/codespaces-jupyter/Reese/Semester 1 Final/Reese\Final.sqlite'  # Name of your SQLite database
 SHEET_NAME = 'Grocery Store Inventory and Transactions'  # Name of Google Sheet
 INVENTORY_WORKSHEET_NAME = 'Inventory'  # Worksheet/tab name for inventory in the Google Sheet
 TRANSACTION_WORKSHEET_NAME = 'Transactions'  # Worksheet/tab name for transactions in the Google Sheet
@@ -215,6 +218,124 @@ def verify_inventory():
         print(row)
     conn.close()
 
+#view sales stats with matplotlib
+def view_sales_stats():
+    try:
+        conn = sqlite3.connect(DB_NAME)
+        cursor = conn.cursor()
+
+        # SQL query to aggregate sales by date
+        query = """
+        SELECT transaction_type, SUM(quantity) AS total_quantity, DATE(transaction_date) AS date
+        FROM Transactions
+        WHERE transaction_type = 'sell'
+        GROUP BY DATE(transaction_date)
+        ORDER BY DATE(transaction_date)
+        """
+        cursor.execute(query)
+        rows = cursor.fetchall()
+
+        if not rows:
+            print("No sales data available.")
+            return
+
+        # Extract dates and quantities
+        dates = [row[2] for row in rows]
+        quantities = [row[1] for row in rows]
+
+        if not dates or not quantities:
+            print("No valid sales data to plot.")
+            return
+
+        # Create directory for the sales stats image if it doesn't exist
+        output_dir = '/workspaces/codespaces-jupyter/Reese/Semester 1 Final/sales images'
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)  # Create the directory if it doesn't exist
+
+        # Generate the plot
+        plt.figure(figsize=(10, 6))
+        plt.plot(dates, quantities, marker='o', linestyle='-', color='b')
+        plt.title("Total Sales Over Time")
+        plt.xlabel("Date")
+        plt.ylabel("Total Quantity Sold")
+        plt.xticks(rotation=45)
+        plt.grid(True)
+        plt.tight_layout()
+
+        # Save the plot as a PNG file in the 'sales_stats_images' folder
+        image_path = os.path.join(output_dir, 'sales_stats.png')
+        plt.savefig(image_path)
+        plt.close()
+
+        print(f"Sales stats graph saved as '{image_path}'. Open this file to view the graph.")
+
+    except Exception as e:
+        print(f"An error occurred while generating sales statistics: {e}")
+    finally:
+        conn.close()
+
+def view_sales_stats_24_hours():
+    try:
+        conn = sqlite3.connect(DB_NAME)
+        cursor = conn.cursor()
+
+        # Ask the user for a specific date (e.g., "2024-12-16") or use the current date
+        specific_date = input("Enter a specific date (YYYY-MM-DD) for the sales stats, or press Enter to use today: ")
+        if not specific_date:
+            specific_date = datetime.now().strftime('%Y-%m-%d')
+
+        # SQL query to get sales per hour for a specific day
+        query = """
+        SELECT 
+            strftime('%H', transaction_date) AS hour, 
+            SUM(quantity) AS total_quantity
+        FROM Transactions
+        WHERE transaction_type = 'sell'
+        AND DATE(transaction_date) = ?
+        GROUP BY hour
+        ORDER BY hour
+        """
+        cursor.execute(query, (specific_date,))
+        rows = cursor.fetchall()
+
+        if not rows:
+            print(f"No sales data available for {specific_date}.")
+            return
+
+        # Extract hours and quantities
+        hours = [row[0] for row in rows]
+        quantities = [row[1] for row in rows]
+
+        if not hours or not quantities:
+            print("No valid sales data to plot.")
+            return
+
+        # Create the plot for sales over the course of the day
+        plt.figure(figsize=(10, 6))
+        plt.plot(hours, quantities, marker='o', linestyle='-', color='b')
+        plt.title(f"Total Sales on {specific_date} by Hour")
+        plt.xlabel("Hour of the Day")
+        plt.ylabel("Total Quantity Sold")
+        plt.xticks(range(0, 24))  # Set x-axis to show hours from 0 to 23
+        plt.grid(True)
+        plt.tight_layout()
+
+        # Save the plot as a PNG file
+        output_dir = '/workspaces/codespaces-jupyter/Reese/Semester 1 Final/sales images'
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+
+        image_path = os.path.join(output_dir, f'sales_stats_{specific_date}.png')
+        plt.savefig(image_path)
+        plt.close()
+
+        print(f"Sales stats graph for {specific_date} saved as '{image_path}'. Open this file to view the graph.")
+
+    except Exception as e:
+        print(f"An error occurred while generating sales statistics: {e}")
+    finally:
+        conn.close()
+
 # Main options
 def main():
     sync_thread = threading.Thread(target=sheet_sync)
@@ -256,7 +377,16 @@ Enter your choice: ''')
             elif options == 4:
                 print('You can edit store items and inventory here: https://docs.google.com/spreadsheets/d/1A5EL5e8NqLPtWlnkad39GRC5DR2DMJxS3TaYiMQh4nM/edit?usp=sharing')
             elif options == 5:
-                break
+                reports = input('''
+Choose one of the following options:
+1 = View Transaction Stats For a Specfic Day
+2 = View All-Time Transaction Stats
+Enter your choice: ''')
+                if reports == 1:
+                    view_sales_stats_24_hours()
+                elif reports == 2:
+                    view_sales_stats
+                print('Graph saved as image successfully!')
             elif options == 6:
                 break
             else:

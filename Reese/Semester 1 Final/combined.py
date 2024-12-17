@@ -87,20 +87,50 @@ def update_transactions_from_sheet(conn, sheet):
 
     conn.commit()
 
+def initialize_db(conn):
+    cursor = conn.cursor()
+    
+    # Create inventory table if it doesn't exist
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS inventory (
+            item_id INTEGER PRIMARY KEY,
+            item_name TEXT,
+            quantity INTEGER,
+            item_price REAL
+        )
+    """)
+    
+    # Create Transactions table if it doesn't exist
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS Transactions (
+            transaction_id TEXT PRIMARY KEY,
+            item_id INTEGER,
+            transaction_type TEXT,
+            quantity INTEGER,
+            transaction_date TEXT,
+            FOREIGN KEY (item_id) REFERENCES inventory (item_id)
+        )
+    """)
+    
+    conn.commit()
+
+
 # Sheet sync in background
 def sheet_sync():
     sheet = authenticate_google_sheets(JSON_KEYFILE).open(SHEET_NAME)
     conn = connect_sqlite(DB_NAME)
+    initialize_db(conn)  # Ensure the table exists before syncing
+
     try:
-        while not stop_sync_event.is_set():  # Check if the stop flag is set
+        while not stop_sync_event.is_set():
             sheet_data = fetch_sheet_data(sheet, INVENTORY_WORKSHEET_NAME)
             update_sqlite_from_sheet(conn, TABLE_NAME, sheet_data)
-            update_transactions_from_sheet(conn, sheet)
-            time.sleep(SYNC_INTERVAL)  # Wait for the next sync cycle
+            time.sleep(SYNC_INTERVAL)
     except KeyboardInterrupt:
         pass
     finally:
         conn.close()
+
 
 # Update Google Sheets with a new transaction
 def update_google_sheet_transaction(transaction_id, item_id, transaction_type, quantity, transaction_date):
@@ -115,94 +145,74 @@ def update_google_sheet_transaction(transaction_id, item_id, transaction_type, q
     except Exception as e:
         print(f"An error occurred while updating Google Sheets: {e}")
 
+def update_google_sheet_summary_transaction(transaction_id, total_items, total_price, transaction_date):
+    try:
+        sheet = authenticate_google_sheets(JSON_KEYFILE).open(SHEET_NAME)
+        worksheet = sheet.worksheet(TRANSACTION_WORKSHEET_NAME)
+
+        # Append a summarized transaction row
+        new_row = [
+            transaction_id,  # Transaction ID
+            total_items,     # Total number of items
+            total_price,     # Total transaction price
+            transaction_date.strftime('%Y-%m-%d %H:%M:%S')  # Transaction Date
+        ]
+        worksheet.append_row(new_row)
+        print(f"Transaction summary logged in Google Sheets: {new_row}")
+    except Exception as e:
+        print(f"An error occurred while updating Google Sheets: {e}")
+
+
 # Log a transaction and update Google Sheets afterward
-def log_transaction(item_id, transaction_type, quantity):
-    connection = sqlite3.connect(DB_NAME)
+def log_transaction(items):
+    connection = sqlite3.connect(DB_NAME, detect_types=sqlite3.PARSE_DECLTYPES)
     cursor = connection.cursor()
+    total_price = 0  # To calculate the total price of the transaction
 
     try:
-        # Check if item exists
-        cursor.execute("SELECT quantity FROM Inventory WHERE item_id = ?", (item_id,))
-        result = cursor.fetchone()
-        if not result:
-            print(f"Item with ID {item_id} does not exist.")
-            return
-
-        current_quantity = int(result[0])
-
-        # Update quantity based on transaction type
-        if transaction_type.lower() == "sell":
-            if quantity > current_quantity:
-                print(f"Not enough stock to sell {quantity}. Current stock: {current_quantity}.")
-                return
-            new_quantity = current_quantity - quantity
-        elif transaction_type.lower() == "buy":
-            new_quantity = current_quantity + quantity
-        else:
-            print("Invalid transaction type. Use 'buy' or 'sell'.")
-            return
-
-        # Generate unique transaction_id
-        transaction_id = str(uuid.uuid4())
-
-        # Log transaction in the database
+        transaction_id = str(uuid.uuid4())  # Ensure a unique transaction ID
         transaction_date = datetime.now()
-        cursor.execute("""
-            INSERT INTO Transactions (transaction_id, item_id, transaction_type, quantity, transaction_date)
-            VALUES (?, ?, ?, ?, ?)
-        """, (transaction_id, item_id, transaction_type, quantity, transaction_date))
 
-        # Update inventory in the database
-        cursor.execute("""
-            UPDATE Inventory
-            SET quantity = ?
-            WHERE item_id = ?
-        """, (new_quantity, item_id))
+        for item_id, quantity in items.items():
+            # Check if item exists
+            cursor.execute("SELECT quantity, item_price FROM Inventory WHERE item_id = ?", (item_id,))
+            result = cursor.fetchone()
+            if not result:
+                print(f"Item with ID {item_id} does not exist.")
+                return
+
+            current_quantity, item_price = result
+            if quantity > current_quantity:
+                print(f"Not enough stock for item {item_id}. Current stock: {current_quantity}.")
+                return
+
+            # Calculate new stock and total price
+            new_quantity = current_quantity - quantity
+            total_price += quantity * item_price
+
+            # Update Inventory Table
+            cursor.execute("UPDATE Inventory SET quantity = ? WHERE item_id = ?", (new_quantity, item_id))
+
+            # Log individual item in Transactions
+            cursor.execute("""
+                INSERT OR IGNORE INTO Transactions (transaction_id, item_id, transaction_type, quantity, transaction_date)
+                VALUES (?, ?, ?, ?, ?)
+            """, (transaction_id, item_id, "sell", quantity, transaction_date))
 
         connection.commit()
-        print(f"Transaction logged: {transaction_type} {quantity} units of item {item_id}. New stock: {new_quantity}. Transaction ID: {transaction_id}")
 
-        # Update Google Sheets
-        update_google_sheet_transaction(transaction_id, item_id, transaction_type, quantity, transaction_date)
+        print(f"Transaction ID: {transaction_id} logged successfully.")
+        print(f"Total Price: ${total_price:.2f}")
 
-        sheet = authenticate_google_sheets(JSON_KEYFILE).open(SHEET_NAME)
-        worksheet = sheet.worksheet(INVENTORY_WORKSHEET_NAME)
-        rows = worksheet.get_all_records()
-        for index, row in enumerate(rows, start=2):
-            if str(row['item_id']) == str(item_id):  # Ensure both are strings
-                worksheet.update_cell(index, list(row.keys()).index('quantity') + 1, new_quantity)
-                print(f"Google Sheets inventory updated for item {item_id}.")
-                break
+        # Log a single summarized transaction row in Google Sheets
+        update_google_sheet_summary_transaction(transaction_id, len(items), total_price, transaction_date)
+
     except Exception as e:
         connection.rollback()
         print(f"An error occurred: {e}")
     finally:
         connection.close()
 
-def view_transactions():
-    try:
-        conn = sqlite3.connect(DB_NAME)
-        cursor = conn.cursor()
-        query = "SELECT * FROM Transactions"
-        cursor.execute(query)
-        rows = cursor.fetchall()
-
-        if not rows:
-            print("No transactions found.")
-            return
-
-        # Print column names
-        columns = [description[0] for description in cursor.description]
-        print(f"{' | '.join(columns)}")
-        print("-" * 50)
-
-        # Print rows
-        for row in rows:
-            print(" | ".join(str(value) for value in row))
-    except Exception as e:
-        print(f"An error occurred while viewing transactions: {e}")
-    finally:
-        conn.close()
 
 # View Inventory (Database)
 def verify_inventory():
@@ -336,6 +346,29 @@ def view_sales_stats_24_hours():
     finally:
         conn.close()
 
+def view_transactions():
+    try:
+        conn = sqlite3.connect(DB_NAME)
+        cursor = conn.cursor()
+        query = "SELECT * FROM Transactions"
+        cursor.execute(query)
+        rows = cursor.fetchall()
+
+        if not rows:
+            print("No transactions found.")
+            return
+
+        columns = [description[0] for description in cursor.description]
+        print(f"{' | '.join(columns)}")
+        print("-" * 50)
+
+        for row in rows:
+            print(" | ".join(str(value) for value in row))
+    except Exception as e:
+        print(f"An error occurred while viewing transactions: {e}")
+    finally:
+        conn.close()
+
 # Main options
 def main():
     sync_thread = threading.Thread(target=sheet_sync)
@@ -359,15 +392,23 @@ Enter your choice: ''')
                 print('Transaction Mode')
                 stop_sync_event.set()
                 print("View Item ID's: https://tinyurl.com/fejfe9r39")
-                item_id = int(input("Enter an Item ID: "))
-                transaction_type = "sell"
-                quantity = int(input("Enter Item Quantity: "))
-                log_transaction(item_id, transaction_type, quantity)
-                stop_sync_event.clear()
-                if not sync_thread or not sync_thread.is_alive():
-                    sync_thread = threading.Thread(target=sheet_sync)
-                    sync_thread.daemon = True
-                    sync_thread.start()
+                items = {}
+                while True:
+                    try:
+                        item_id = int(input("Enter Item ID (or 0 to finish): "))
+                        if item_id == 0:
+                            break
+                        quantity = int(input("Enter Quantity: "))
+                        if item_id in items:
+                            items[item_id] += quantity
+                        else:
+                            items[item_id] = quantity
+                    except ValueError:
+                        print("Invalid input. Try again.")
+                if items:
+                    log_transaction(items)
+                else:
+                    print("No items to process.")
             elif options == 2:
                 print('View Transaction History')
                 view_transactions()
