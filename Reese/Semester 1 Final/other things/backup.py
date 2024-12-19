@@ -15,7 +15,8 @@ DB_NAME = '/workspaces/codespaces-jupyter/Reese/Semester 1 Final/Reese\Final.sql
 SHEET_NAME = 'Grocery Store Inventory and Transactions'  # Name of Google Sheet
 INVENTORY_WORKSHEET_NAME = 'Inventory'  # Worksheet/tab name for inventory in the Google Sheet
 TRANSACTION_WORKSHEET_NAME = 'Transactions'  # Worksheet/tab name for transactions in the Google Sheet
-TABLE_NAME = 'inventory'  # SQLite table name
+INVENTORY_TABLE_NAME = 'inventory'  # SQLite inventory table name
+TRANSACTION_TABLE_NAME = 'Transactions' #SQLite Transactions table name
 SYNC_INTERVAL = 5  # Interval in seconds between each sync
 
 # Global event to stop the background sync
@@ -36,15 +37,25 @@ def fetch_sheet_data(sheet, worksheet_name):
     worksheet = sheet.worksheet(worksheet_name)
     return worksheet.get_all_records()  # Returns data as a list of dictionaries
 
-# Update SQLite database from Google Sheets
+# Update SQLite database inventory and Transactions from Google Sheets
 def update_sqlite_from_sheet(conn, table_name, sheet_data):
     cursor = conn.cursor()
+
+    if not sheet_data:
+        cursor.execute(f"DELETE FROM {table_name}")  # Delete all rows from the table if no data
+        conn.commit()
+        return  # Skip inserting new data since the table is cleared
+
+    # Process the data and insert into SQLite if sheet data is available
     columns = ", ".join(sheet_data[0].keys())
     placeholders = ", ".join("?" * len(sheet_data[0]))
-    cursor.execute(f"DELETE FROM {table_name}")  # Clear table before syncing
+    cursor.execute(f"DELETE FROM {table_name}")  # Optional: Clear table before inserting new data (if you want to replace existing data)
+    
     for row in sheet_data:
         cursor.execute(f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})", tuple(row.values()))
+    
     conn.commit()
+
 
 # Update SQLite database transactions from Google Sheets
 def update_transactions_from_sheet(conn, sheet):
@@ -124,7 +135,9 @@ def sheet_sync():
     try:
         while not stop_sync_event.is_set():
             sheet_data = fetch_sheet_data(sheet, INVENTORY_WORKSHEET_NAME)
-            update_sqlite_from_sheet(conn, TABLE_NAME, sheet_data)
+            update_sqlite_from_sheet(conn, INVENTORY_TABLE_NAME, sheet_data)
+            sheet_data = fetch_sheet_data(sheet, TRANSACTION_WORKSHEET_NAME)
+            update_sqlite_from_sheet(conn, TRANSACTION_TABLE_NAME, sheet_data)
             time.sleep(SYNC_INTERVAL)
     except KeyboardInterrupt:
         pass
@@ -133,48 +146,74 @@ def sheet_sync():
 
 
 # Update Google Sheets with a new transaction
-def update_google_sheet_transaction(transaction_id, item_id, transaction_type, quantity, transaction_date):
+def update_google_sheet_summary_transaction(transaction_id, item_id_list, total_quantity, total_price, transaction_date):
     try:
         sheet = authenticate_google_sheets(JSON_KEYFILE).open(SHEET_NAME)
         worksheet = sheet.worksheet(TRANSACTION_WORKSHEET_NAME)
 
-        # Append the transaction as a new row
-        new_row = [transaction_id, item_id, transaction_type, quantity, transaction_date.strftime('%Y-%m-%d %H:%M:%S')]
-        worksheet.append_row(new_row)
-        print(f"Transaction logged in Google Sheets: {new_row}")
-    except Exception as e:
-        print(f"An error occurred while updating Google Sheets: {e}")
-
-def update_google_sheet_summary_transaction(transaction_id, total_items, total_price, transaction_date):
-    try:
-        sheet = authenticate_google_sheets(JSON_KEYFILE).open(SHEET_NAME)
-        worksheet = sheet.worksheet(TRANSACTION_WORKSHEET_NAME)
-
-        # Append a summarized transaction row
+        # Prepare the new row
         new_row = [
             transaction_id,  # Transaction ID
-            total_items,     # Total number of items
-            total_price,     # Total transaction price
+            item_id_list,     # Comma-separated list of item IDs
+            total_quantity,   # Total quantity of items purchased
+            total_price,      # Total price for the transaction
             transaction_date.strftime('%Y-%m-%d %H:%M:%S')  # Transaction Date
         ]
+
+        # Append the new row to the Google Sheet
         worksheet.append_row(new_row)
-        print(f"Transaction summary logged in Google Sheets: {new_row}")
+        print(f"Transaction logged in Google Sheets: {new_row}")
+
     except Exception as e:
         print(f"An error occurred while updating Google Sheets: {e}")
+
+#update inventory
+def update_google_sheet_inventory():
+    try:
+        conn = sqlite3.connect(DB_NAME)
+        cursor = conn.cursor()
+
+        # Fetch all inventory data from the database
+        cursor.execute("SELECT item_id, item_name, quantity, item_price FROM inventory")
+        inventory_data = cursor.fetchall()
+
+        # Authenticate and open the Google Sheet
+        sheet = authenticate_google_sheets(JSON_KEYFILE).open(SHEET_NAME)
+        worksheet = sheet.worksheet(INVENTORY_WORKSHEET_NAME)
+
+        # Clear the current content of the worksheet (optional but recommended for accurate sync)
+        worksheet.clear()
+
+        # Define the header row
+        header = ["item_id", "item_name", "quantity", "item_price"]
+        worksheet.append_row(header)
+
+        # Append all inventory rows
+        for row in inventory_data:
+            worksheet.append_row(list(row))
+
+        print("Inventory updated in Google Sheets.")
+
+    except Exception as e:
+        print(f"An error occurred while updating Google Sheets inventory: {e}")
+
+    finally:
+        conn.close()
 
 
 # Log a transaction and update Google Sheets afterward
 def log_transaction(items):
     connection = sqlite3.connect(DB_NAME, detect_types=sqlite3.PARSE_DECLTYPES)
     cursor = connection.cursor()
-    total_price = 0  # To calculate the total price of the transaction
+    total_price = 0
+    total_quantity = 0
+    item_ids = []
 
     try:
-        transaction_id = str(uuid.uuid4())  # Ensure a unique transaction ID
+        transaction_id = str(uuid.uuid4())
         transaction_date = datetime.now()
 
         for item_id, quantity in items.items():
-            # Check if item exists
             cursor.execute("SELECT quantity, item_price FROM Inventory WHERE item_id = ?", (item_id,))
             result = cursor.fetchone()
             if not result:
@@ -186,14 +225,13 @@ def log_transaction(items):
                 print(f"Not enough stock for item {item_id}. Current stock: {current_quantity}.")
                 return
 
-            # Calculate new stock and total price
             new_quantity = current_quantity - quantity
             total_price += quantity * item_price
+            total_quantity += quantity
+            item_ids.append(str(item_id))
 
-            # Update Inventory Table
             cursor.execute("UPDATE Inventory SET quantity = ? WHERE item_id = ?", (new_quantity, item_id))
 
-            # Log individual item in Transactions
             cursor.execute("""
                 INSERT OR IGNORE INTO Transactions (transaction_id, item_id, transaction_type, quantity, transaction_date)
                 VALUES (?, ?, ?, ?, ?)
@@ -201,11 +239,17 @@ def log_transaction(items):
 
         connection.commit()
 
-        print(f"Transaction ID: {transaction_id} logged successfully.")
-        print(f"Total Price: ${total_price:.2f}")
+        item_id_list = ", ".join(item_ids)
+        formatted_total_price = f"${total_price:.2f}"
 
-        # Log a single summarized transaction row in Google Sheets
-        update_google_sheet_summary_transaction(transaction_id, len(items), total_price, transaction_date)
+        update_google_sheet_summary_transaction(transaction_id, item_id_list, total_quantity, formatted_total_price, transaction_date)
+
+        # Sync inventory with Google Sheets
+        update_google_sheet_inventory()
+
+        print(f"Transaction ID: {transaction_id} logged successfully.")
+        print(f"Total Quantity: {total_quantity} items.")
+        print(f"Total Price: {formatted_total_price}")
 
     except Exception as e:
         connection.rollback()
@@ -213,20 +257,6 @@ def log_transaction(items):
     finally:
         connection.close()
 
-
-# View Inventory (Database)
-def verify_inventory():
-    conn = sqlite3.connect(DB_NAME)
-    query = f"SELECT * FROM inventory"
-    cursor = conn.cursor()
-    cursor.execute(query)
-    rows = cursor.fetchall()
-    columns = [description[0] for description in cursor.description]
-    print("Database Contents:")
-    print(columns)
-    for row in rows:
-        print(row)
-    conn.close()
 
 #view sales stats with matplotlib
 def view_sales_stats():
@@ -346,11 +376,25 @@ def view_sales_stats_24_hours():
     finally:
         conn.close()
 
+# View Inventory (Database)
+def verify_inventory():
+    conn = sqlite3.connect(DB_NAME)
+    query = f"SELECT * FROM inventory"
+    cursor = conn.cursor()
+    cursor.execute(query)
+    rows = cursor.fetchall()
+    columns = [description[0] for description in cursor.description]
+    print("Database Contents:")
+    print(columns)
+    for row in rows:
+        print(row)
+    conn.close()
+
 def view_transactions():
     try:
         conn = sqlite3.connect(DB_NAME)
         cursor = conn.cursor()
-        query = "SELECT * FROM Transactions"
+        query = "SELECT transaction_id, item_id, quantity, transaction_date FROM Transactions;"
         cursor.execute(query)
         rows = cursor.fetchall()
 
@@ -409,6 +453,11 @@ Enter your choice: ''')
                     log_transaction(items)
                 else:
                     print("No items to process.")
+                stop_sync_event.clear()
+                if not sync_thread or not sync_thread.is_alive():
+                    sync_thread = threading.Thread(target=sheet_sync)
+                    sync_thread.daemon = True
+                    sync_thread.start()
             elif options == 2:
                 print('View Transaction History')
                 view_transactions()
@@ -437,4 +486,4 @@ Enter your choice: ''')
 
 if __name__ == "__main__":
     main()
-
+    
