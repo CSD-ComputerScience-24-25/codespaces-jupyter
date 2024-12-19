@@ -1,7 +1,7 @@
 import sqlite3
 
 #conn = sqlite3.connect('Reese\Reese.sqlite')
-conn = sqlite3.connect('/workspaces/codespaces-jupyter/Reese/Semester 1 Final/Reese\Final.sqlite')
+conn = sqlite3.connect('/workspaces/codespaces-jupyter/Reese/Semester 1 Final/Groccery-Store-SQLite-DB-Reese.sqlite')
 cur = conn.cursor()
 
 while True:
